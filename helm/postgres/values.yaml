@@ -32,12 +32,12 @@ postgresVersion: 16
 # "pgBouncerConfig". Setting "pgBouncerConfig" will override the value of
 # pgBouncerReplicas. The "RELATED_IMAGE_PGBOUNCER" in the PGO deployment must be
 # set if you want to enable this without explicitly setting "pgBouncer".
-# pgBouncerReplicas: 1
+pgBouncerReplicas: 1
 
 # monitoring enables the ability to monitor the Postgres cluster through a
 # metrics exporter that can be scraped by Prometheus. This defaults to the value
 # below.
-# monitoring: false
+monitoring: true
 
 ###################
 # Image Overrides #
@@ -77,22 +77,22 @@ postgresVersion: 16
 # This defaults to the "default" storage class defined in the cluster.
 # See: 'kubectl get storageclasses.storage.k8s.io | grep default'
 # Settings "instances" overrides this value.
-# instanceStorageClassName: "hostpath"
+instanceStorageClassName: "nfs-client"
 
 # instanceMemory sets the memory limit for the Postgres instances. This defaults
 # to no limit being set, but an example value is set below. Settings "instances"
 # overrides this value.
-# instanceMemory: 2Gi
+instanceMemory: 2Gi
 
 # instanceCPU sets the CPU limit for the Postgres instances. This defaults to
 # no limit being set, but an example value is set below. Setting "instances"
 # overrides this value.
-# instanceCPU: 1000m
+instanceCPU: 500m
 
 # instanceReplicas lets you set the total number of Postgres replicas. This
 # defaults to the value below. More than on replica enables high availability
 # (HA). Settings "instances" overrides this value.
-# instanceReplicas: 1
+instanceReplicas: 2
 
 ##############################
 # Advanced Postgres Settings #
@@ -180,7 +180,7 @@ postgresVersion: 16
 # backupsStorageClassName sets the storage class to a class existing in Kubernetes.
 # Defaults to the "default" storage class defined in the cluster.
 # Can be overridden by "pgBackRestConfig", if set.
-# backupsStorageClassName: "hostpath"
+backupsStorageClassName: "nfs-client"
 
 # s3 allows for AWS S3 or an S3 compatible storage system to be used for
 # backups. This allows for a quick setup with S3; if you need more advanced
